@@ -106,13 +106,13 @@ Let's denote the following:
 
 For an LWR-based ciphertext $\( c \)$ corresponding to a message $\( m \)$, we have:
 
-$\[ c = \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil + m \mod p \]$
+$c = \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil + m \mod p \$
 
 Now, let's introduce an SHE scheme that allows for a limited number of additions and multiplications on ciphertexts. We want to use this SHE to meta-encrypt the error from the LWR scheme.
 
 The idea is to compute the LWR error as:
 
-$\[ e = c - \left( \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil \mod p \right) \]$
+$e = c - \left( \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil \mod p \right) \$
 
 Then, encrypt this error with the SHE scheme:
 
