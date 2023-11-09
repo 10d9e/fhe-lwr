@@ -125,7 +125,7 @@ Alright, let's construct a very simplified toy example that demonstrates the con
 **LWR Encryption of a Single Bit Message \( m \):**
 - Let's say $\( m = 1 \)$.
 - Calculate $\( c \)$ without noise for simplicity:
-- 
+
   $\[ c = \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i \cdot s_i) \right\rceil + m \mod p \]$
   
   In this case, since $\( s_i = 1 \)$, the dot product simplifies to the sum of $\( a_i \)$.
