@@ -63,9 +63,9 @@ So the question then becomes, when bootstrapping on an LWR scheme, would it be p
 
 It's like playing a video game where you have a magic potion (the encrypted error) that can heal you (correct the error) every time you take a hit (introduce rounding error). But every time you use the potion, there's a slight chance it might not work perfectly (introducing new errors), and you have to make sure the enemy (adversary) doesn't realize you have this potion, or they'll change their strategy (attack vector).
 
-**Formalization**
+**Sketch**
 
-Formalizing an approach for meta-encrypting error values within a somewhat homomorphic encryption (SHE) scheme to bootstrap an LWR-based FHE system is quite speculative and would push the boundaries of current cryptographic research. However, I can provide a high-level conceptual outline of what such a scheme might entail. This will not be a formal specification, as creating such a scheme would be a novel contribution to the field of cryptography and would require rigorous proof of security and functionality.
+Formalizing an approach for meta-encrypting error values within a somewhat homomorphic encryption (SHE) scheme to bootstrap an LWR-based FHE system is quite speculative and would push the boundaries of current cryptographic research. This is not be a formal specification, just a sketch, as creating such a scheme would be a novel contribution to the field of cryptography and would require rigorous proof of security and functionality.
 
 Let's denote the following:
 
