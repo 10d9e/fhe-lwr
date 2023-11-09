@@ -43,7 +43,7 @@ It's like you have a clockwork mechanism (LWR) versus a fluid one (LWE). The clo
 
 In summary, while there may be potential for efficiency in an "LWR bootstrap" due to the deterministic nature of errors, realizing this efficiency in practice while maintaining security and correctness is a significant challenge. The idea is intriguing, but it requires further research to determine its viability.
 
-**Bootstrapping on LWR*
+**Bootstrapping on LWR**
 
 So the question then becomes, when bootstrapping on an LWR scheme, would it be possible to use an encrypted value within the context of homomorphic operations to manage or offset errors. Let's consider the feasibility and implications of this approach:
 
@@ -63,7 +63,7 @@ So the question then becomes, when bootstrapping on an LWR scheme, would it be p
 
 It's like playing a video game where you have a magic potion (the encrypted error) that can heal you (correct the error) every time you take a hit (introduce rounding error). But every time you use the potion, there's a slight chance it might not work perfectly (introducing new errors), and you have to make sure the enemy (adversary) doesn't realize you have this potion, or they'll change their strategy (attack vector).
 
-**What would it look like?**
+**Formalization**
 
 Formalizing an approach for meta-encrypting error values within a somewhat homomorphic encryption (SHE) scheme to bootstrap an LWR-based FHE system is quite speculative and would push the boundaries of current cryptographic research. However, I can provide a high-level conceptual outline of what such a scheme might entail. This will not be a formal specification, as creating such a scheme would be a novel contribution to the field of cryptography and would require rigorous proof of security and functionality.
 
