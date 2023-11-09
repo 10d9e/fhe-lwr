@@ -100,9 +100,9 @@ Let's denote the following:
 - $\( \mathbf{a} \)$ is a public vector.
 - $\( q \)$ is a large modulus.
 - $\( p \)$ is a smaller modulus used for rounding.
-- $\( \text{Enc}_{\mathbf{s}}(\cdot) \)$ represents the encryption function under the secret key \( \mathbf{s} \).
-- $\( \text{Dec}_{\mathbf{s}}(\cdot) \)$ represents the decryption function under the secret key \( \mathbf{s} \).
-- $\( \lfloor \cdot \rceil_p \)$ represents the rounding operation to the nearest multiple of \( p \).
+- $\( \text{Enc}_{\mathbf{s}}(\cdot) \)$ represents the encryption function under the secret key $\( \mathbf{s} \)$.
+- $\( \text{Dec}_{\mathbf{s}}(\cdot) \)$ represents the decryption function under the secret key $\( \mathbf{s} \)$.
+- $\( \lfloor \cdot \rceil_p \)$ represents the rounding operation to the nearest multiple of $\( p \)$.
 
 For an LWR-based ciphertext $\( c \)$ corresponding to a message $\( m \)$, we have:
 
