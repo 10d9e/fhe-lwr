@@ -69,31 +69,35 @@ Formalizing an approach for meta-encrypting error values within a somewhat homom
 
 Let's denote the following:
 
-- \( \mathbf{s} \) is the secret key.
-- \( \mathbf{a} \) is a public vector.
-- \( q \) is a large modulus.
-- \( p \) is a smaller modulus used for rounding.
-- \( \text{Enc}_{\mathbf{s}}(\cdot) \) represents the encryption function under the secret key \( \mathbf{s} \).
-- \( \text{Dec}_{\mathbf{s}}(\cdot) \) represents the decryption function under the secret key \( \mathbf{s} \).
-- \( \lfloor \cdot \rceil_p \) represents the rounding operation to the nearest multiple of \( p \).
+- $\( \mathbf{s} \)$ is the secret key.
+- $\( \mathbf{a} \)$ is a public vector.
+- $\( q \)$ is a large modulus.
+- $\( p \)$ is a smaller modulus used for rounding.
+- $\( \text{Enc}_{\mathbf{s}}(\cdot) \)$ represents the encryption function under the secret key \( \mathbf{s} \).
+- $\( \text{Dec}_{\mathbf{s}}(\cdot) \)$ represents the decryption function under the secret key \( \mathbf{s} \).
+- $\( \lfloor \cdot \rceil_p \)$ represents the rounding operation to the nearest multiple of \( p \).
 
-For an LWR-based ciphertext \( c \) corresponding to a message \( m \), we have:
-\[ c = \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil + m \mod p \]
+For an LWR-based ciphertext $\( c \)$ corresponding to a message $\( m \)$, we have:
+
+$\[ c = \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil + m \mod p \]$
 
 Now, let's introduce an SHE scheme that allows for a limited number of additions and multiplications on ciphertexts. We want to use this SHE to meta-encrypt the error from the LWR scheme.
 
 The idea is to compute the LWR error as:
-\[ e = c - \left( \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil \mod p \right) \]
+
+$\[ e = c - \left( \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil \mod p \right) \]$
 
 Then, encrypt this error with the SHE scheme:
-\[ e_{\text{enc}} = \text{Enc}_{\mathbf{s}}(e) \]
+
+$\[ e_{\text{enc}} = \text{Enc}_{\mathbf{s}}(e) \]$
 
 During the computation, if we want to add or multiply ciphertexts and then "refresh" or "bootstrap" the noise, we would homomorphically subtract the encrypted error from the result:
-\[ c_{\text{refreshed}} = \text{HomomorphicOp}(c_{\text{result}}) - e_{\text{enc}} \]
+
+$\[ c_{\text{refreshed}} = \text{HomomorphicOp}(c_{\text{result}}) - e_{\text{enc}} \]$
 
 To perform this operation correctly, the homomorphic subtraction needs to align with the LWR error correction, which is a non-trivial task due to the deterministic nature of the rounding error.
 
-The refreshed ciphertext \( c_{\text{refreshed}} \) would have reduced error and could be further used in computations until the next refresh is needed.
+The refreshed ciphertext $\( c_{\text{refreshed}} \)$ would have reduced error and could be further used in computations until the next refresh is needed.
 
 *Let's take a breath and ponder...*
 
@@ -112,48 +116,55 @@ In practice, developing such a meta-encryption bootstrapping method would be gro
 Alright, let's construct a very simplified toy example that demonstrates the concept of using a somewhat homomorphic encryption (SHE) scheme to manage and correct the deterministic error in a Learning with Rounding (LWR) based encryption system. This example is purely illustrative and lacks the complexity and security features of a real-world system.
 
 **Setup:**
-- Let \( q \) be a large modulus, \( q = 1024 \).
-- Let \( p \) be a smaller modulus for rounding, \( p = 32 \).
-- Let \( \mathbf{s} \) be the secret key, where \( \mathbf{s} = [s_1, s_2, ..., s_n] \) and for simplicity \( s_i = 1 \) for all \( i \).
-- Let \( \mathbf{a} \) be the public vector, where \( \mathbf{a} = [a_1, a_2, ..., a_n] \) and for simplicity \( a_i = 2^i \) mod \( q \) for all \( i \).
-- The rounding function \( \lfloor \cdot \rceil_p \) rounds to the nearest integer multiple of \( p \).
+- Let $\( q \)$ be a large modulus, $\( q = 1024 \)$.
+- Let $\( p \)$ be a smaller modulus for rounding, $\( p = 32 \)$.
+- Let $\( \mathbf{s} \)$ be the secret key, where $\( \mathbf{s} = [s_1, s_2, ..., s_n] \)$ and for simplicity $\( s_i = 1 \)$ for all $\( i \)$.
+- Let $\( \mathbf{a} \)$ be the public vector, where $\( \mathbf{a} = [a_1, a_2, ..., a_n] \)$ and for simplicity $\( a_i = 2^i \)$ mod $\( q \)$ for all $\( i \)$.
+- The rounding function $\( \lfloor \cdot \rceil_p \)$ rounds to the nearest integer multiple of $\( p \)$.
 
 **LWR Encryption of a Single Bit Message \( m \):**
-- Let's say \( m = 1 \).
-- Calculate \( c \) without noise for simplicity:
-  \[ c = \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i \cdot s_i) \right\rceil + m \mod p \]
-  In this case, since \( s_i = 1 \), the dot product simplifies to the sum of \( a_i \).
+- Let's say $\( m = 1 \)$.
+- Calculate $\( c \)$ without noise for simplicity:
+- 
+  $\[ c = \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i \cdot s_i) \right\rceil + m \mod p \]$
+  
+  In this case, since $\( s_i = 1 \)$, the dot product simplifies to the sum of $\( a_i \)$.
 
 **SHE Setup:**
-- Let's have an SHE scheme that supports addition and consider it's encryption and decryption functions as \( \text{Enc}_{\mathbf{s}}(\cdot) \) and \( \text{Dec}_{\mathbf{s}}(\cdot) \), respectively.
+- Let's have an SHE scheme that supports addition and consider it's encryption and decryption functions as $\( \text{Enc}_{\mathbf{s}}(\cdot) \) and \( \text{Dec}_{\mathbf{s}}(\cdot) \)$, respectively.
 
 **LWR Error Calculation and Encryption:**
 - The error would be the difference between the unrounded and rounded product:
-  \[ e = \left(\frac{p}{q} (\sum_{i=1}^{n} a_i) \mod q \right) - \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i) \right\rceil \mod p \]
+  
+  $\[ e = \left(\frac{p}{q} (\sum_{i=1}^{n} a_i) \mod q \right) - \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i) \right\rceil \mod p \]$
 - Encrypt this error with the SHE scheme:
-  \[ e_{\text{enc}} = \text{Enc}_{\mathbf{s}}(e) \]
+  
+  $\[ e_{\text{enc}} = \text{Enc}_{\mathbf{s}}(e) \]$
 
 **Homomorphic Operations:**
-- Assume we have two encrypted LWR ciphertexts \( c_1 \) and \( c_2 \) that we want to add homomorphically.
+- Assume we have two encrypted LWR ciphertexts $\( c_1 \)$ and $\( c_2 \)$ that we want to add homomorphically.
 - We add them together:
-  \[ c_{\text{result}} = (c_1 + c_2) \mod p \]
+  
+  $\[ c_{\text{result}} = (c_1 + c_2) \mod p \]$
+  
 - We then subtract the encrypted error from the result homomorphically:
-  \[ c_{\text{refreshed}} = c_{\text{result}} - e_{\text{enc}} \]
+  
+  $\[ c_{\text{refreshed}} = c_{\text{result}} - e_{\text{enc}} \]$
 
 **Decryption:**
-- The receiver, who possesses the secret key \( \mathbf{s} \), would perform decryption on \( c_{\text{refreshed}} \) to obtain the correct result.
+- The receiver, who possesses the secret key $\( \mathbf{s} \)$, would perform decryption on $\( c_{\text{refreshed}} \)$ to obtain the correct result.
 
 *Let's imagine a basic calculation...*
 
-If \( n = 2 \), \( a_1 = 2 \), and \( a_2 = 4 \), then:
+If $\( n = 2 \)$, $\( a_1 = 2 \)$, and $\( a_2 = 4 \)$, then:
 
-- \( c = \left\lfloor \frac{32}{1024} (2 + 4) \right\rceil + 1 \mod 32 = \left\lfloor \frac{192}{1024} \right\rceil + 1 = 0 + 1 = 1 \) (since \( \frac{192}{1024} \) is less than \( \frac{1}{2} \) of \( 32 \), we round down to 0).
-- \( e = \left(\frac{192}{1024} \mod 1024 \right) - \left\lfloor \frac{192}{1024} \right\rceil = \frac{192}{1024} - 0 = \frac{192}{1024} \).
-- \( e_{\text{enc}} = \text{Enc}_{\mathbf{s}}\left(\frac{192}{1024}\right) \).
+- $\( c = \left\lfloor \frac{32}{1024} (2 + 4) \right\rceil + 1 \mod 32 = \left\lfloor \frac{192}{1024} \right\rceil + 1 = 0 + 1 = 1 \)$ (since $\( \frac{192}{1024} \)$ is less than $\( \frac{1}{2} \)$ of $\( 32 \)$, we round down to 0).
+- $\( e = \left(\frac{192}{1024} \mod 1024 \right) - \left\lfloor \frac{192}{1024} \right\rceil = \frac{192}{1024} - 0 = \frac{192}{1024} \)$.
+- $\( e_{\text{enc}} = \text{Enc}_{\mathbf{s}}\left(\frac{192}{1024}\right) \)$.
 
 *Upon decrypting...*
 
-The receiver would then decrypt \( c_{\text{refreshed}} \) with \( \text{Dec}_{\mathbf{s}}(\cdot) \) and apply any necessary rounding or scaling to interpret the result as either 0 or 1 (for a bit).
+The receiver would then decrypt $\( c_{\text{refreshed}} \)$ with $\( \text{Dec}_{\mathbf{s}}(\cdot) \)$ and apply any necessary rounding or scaling to interpret the result as either 0 or 1 (for a bit).
 
 Remember, this toy example omits many practical and security considerations and focuses on the theory of the scheme.
 
