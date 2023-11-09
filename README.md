@@ -24,7 +24,7 @@ Learning with Rounding (LWR) is a variant of the Learning with Errors (LWE) prob
 
 *Let's consider an analogy...*
 
-Imagine you're an archer trying to hit targets (solving equations) to win a prize (breaking the encryption). In the LWE version of the game, every time you hit a target, the organizer throws a handful of confetti (error) that might slightly shift your arrow off the bullseye. With LWR, instead, the targets are on rotating platforms (rounding operation) that might turn your direct hit into a near-miss. The challenge is figuring out where to aim, given the platform's predictable but obfuscating movement, to ensure a bullseye – a task presumed to be difficult enough to base security on.
+*Imagine you're an archer trying to hit targets (solving equations) to win a prize (breaking the encryption). In the LWE version of the game, every time you hit a target, the organizer throws a handful of confetti (error) that might slightly shift your arrow off the bullseye. With LWR, instead, the targets are on rotating platforms (rounding operation) that might turn your direct hit into a near-miss. The challenge is figuring out where to aim, given the platform's predictable but obfuscating movement, to ensure a bullseye – a task presumed to be difficult enough to base security on.*
 
 In practice, while LWR simplifies the process by removing the need for generating random noise, it still maintains computational hardness sufficient for cryptographic purposes, making it an attractive component in designing efficient and secure systems in the era of quantum threats.
 
@@ -44,9 +44,7 @@ In the context of Learning with Rounding (LWR), achieving unbounded Fully Homomo
 
 *If we were to daydream about a perfect cryptographic world...*
 
-It would be akin to having a self-cleaning oven that could handle all the spills and splatters of baking (computations) without any loss in oven functionality (data integrity) or the need for the baker (user) to intervene. In the cryptographic landscape, this is the Holy Grail — an FHE scheme that could handle unlimited computations without significant performance degradation or security compromises.
-
-In practice, achieving this for LWR-based homomorphic encryption remains theoretical. To date, no fully satisfactory method for unbounded FHE using LWR has been proposed that matches the practicality of bootstrapping in LWE-based schemes. The research is ongoing, and it's possible that advances in lattice-based cryptography or new insights into rounding errors could provide a breakthrough in the future. For now, though, the quest for an efficient and secure unbounded FHE scheme using LWR continues, with the community actively exploring novel techniques and approaches.
+*It would be akin to having a self-cleaning oven that could handle all the spills and splatters of baking (computations) without any loss in oven functionality (data integrity) or the need for the baker (user) to intervene. In the cryptographic landscape, this is the Holy Grail — an FHE scheme that could handle unlimited computations without significant performance degradation or security compromises.*
 
 In theory, one might think that because Learning with Rounding (LWR) introduces a constant and deterministic error, it would simplify the process of bootstrapping compared to the Learning with Errors (LWE) approach, where the error is random. However, there are several nuances to consider:
 
@@ -62,13 +60,13 @@ In theory, one might think that because Learning with Rounding (LWR) introduces 
 
 *Let's take a moment to think about this...*
 
-The process of bootstrapping in an LWR-based scheme would indeed look different from LWE bootstrapping. If designed properly, it could potentially offer efficiency gains, especially since you could potentially avoid some of the complex Gaussian sampling typically associated with LWE. However, these gains would need to be carefully balanced against the potential security risks and the challenges associated with managing deterministic errors through multiple rounds of computation.
+*The process of bootstrapping in an LWR-based scheme would indeed look different from LWE bootstrapping. If designed properly, it could potentially offer efficiency gains, especially since you could potentially avoid some of the complex Gaussian sampling typically associated with LWE. However, these gains would need to be carefully balanced against the potential security risks and the challenges associated with managing deterministic errors through multiple rounds of computation.*
 
 *If we're to stretch our imagination...*
 
-It's like you have a clockwork mechanism (LWR) versus a fluid one (LWE). The clockwork might be more predictable, which seems like it would make things easier to manage — until you realize that clockwork can fall out of sync just as fluid systems can become turbulent. The challenge is not just about managing the error but ensuring that, in doing so, you don't introduce weaknesses or complexities elsewhere in the system.
+*It's like you have a clockwork mechanism (LWR) versus a fluid one (LWE). The clockwork might be more predictable, which seems like it would make things easier to manage — until you realize that clockwork can fall out of sync just as fluid systems can become turbulent. The challenge is not just about managing the error but ensuring that, in doing so, you don't introduce weaknesses or complexities elsewhere in the system.*
 
-In summary, while there may be potential for efficiency in an "LWR bootstrap" due to the deterministic nature of errors, realizing this efficiency in practice while maintaining security and correctness is a significant challenge. The idea is intriguing, but it requires further research to determine its viability.
+While there may be potential for efficiency in an "LWR bootstrap" due to the deterministic nature of errors, realizing this efficiency in practice while maintaining security and correctness is a significant challenge. The idea is intriguing, but it requires further research to determine its viability.
 
 **Bootstrapping on LWR**
 
@@ -88,7 +86,7 @@ So the question then becomes, when bootstrapping on an LWR scheme, would it be p
 
 *Reflecting on the cryptographic landscape...*
 
-It's like playing a video game where you have a magic potion (the encrypted error) that can heal you (correct the error) every time you take a hit (introduce rounding error). But every time you use the potion, there's a slight chance it might not work perfectly (introducing new errors), and you have to make sure the enemy (adversary) doesn't realize you have this potion, or they'll change their strategy (attack vector).
+*It's like playing a video game where you have a magic potion (the encrypted error) that can heal you (correct the error) every time you take a hit (introduce rounding error). But every time you use the potion, there's a slight chance it might not work perfectly (introducing new errors), and you have to make sure the enemy (adversary) doesn't realize you have this potion, or they'll change their strategy (attack vector).*
 
 **Sketch**
 
@@ -128,13 +126,13 @@ The refreshed ciphertext $\( c_{\text{refreshed}} \)$ would have reduced error a
 
 *Let's take a breath and ponder...*
 
-Such a scheme would require the SHE used for error encryption to be compatible with the LWR-based system in terms of the operations it supports and the way it handles errors. It would also require a method for ensuring that the homomorphic operations on the encrypted error do not introduce additional errors that compound beyond control.
+*Such a scheme would require the SHE used for error encryption to be compatible with the LWR-based system in terms of the operations it supports and the way it handles errors. It would also require a method for ensuring that the homomorphic operations on the encrypted error do not introduce additional errors that compound beyond control.*
 
-The formal expression I've outlined is an oversimplification and would need to be fleshed out with precise mathematical definitions, including how messages are encoded into the system, the exact nature of the rounding, and the construction of the homomorphic operations.
+*The sketch above is an oversimplification and would need to be fleshed out with precise mathematical definitions, including how messages are encoded into the system, the exact nature of the rounding, and the construction of the homomorphic operations.*
 
 *In an imaginative analogy...*
 
-It's like having a noise-canceling headphone (the SHE scheme) that listens to the background noise (the rounding error) and plays an inverse frequency (encrypted error value) to cancel it out. However, the headphone must be perfectly tuned to the specific noise pattern, and if it misjudges the noise even slightly, it might end up amplifying it instead of canceling it.
+*It's like having a noise-canceling headphone (the SHE scheme) that listens to the background noise (the rounding error) and plays an inverse frequency (encrypted error value) to cancel it out. However, the headphone must be perfectly tuned to the specific noise pattern, and if it misjudges the noise even slightly, it might end up amplifying it instead of canceling it.*
 
 In practice, developing such a meta-encryption bootstrapping method would be groundbreaking work in the field of lattice-based cryptography. It would involve both theoretical innovations as well as practical implementations and security analyses to ensure it functions correctly and securely.
 
@@ -201,7 +199,7 @@ Remember, this toy example omits many practical and security considerations and 
 
 **Simple Python implementation**
 
-Certainly! Let's create a Python toy example that demonstrates the basic idea. This is a highly simplified model and not secure by any means. It's only meant to illustrate the concepts discussed. We'll use basic integer arithmetic to simulate the encryption, homomorphic addition, and decryption processes.
+Let's create a Python toy example that demonstrates the basic idea. This is a highly simplified model and not secure by any means. It's only meant to illustrate the concepts discussed. We'll use basic integer arithmetic to simulate the encryption, homomorphic addition, and decryption processes.
 
 ```python
 import random
@@ -280,4 +278,4 @@ In this toy example:
 - We homomorphically add two ciphertexts with `homomorphic_add`.
 - We calculate and correct the error as if it were encrypted and decrypted homomorphically. In a real system, there would be actual encryption and decryption of the error, which would also introduce and then correct additional noise.
 
-This code will run and demonstrate the basic idea, but remember, this is not a secure implementation. It's purely for educational purposes to illustrate the concept of managing deterministic rounding errors in a hypothetical LWR-based homomorphic encryption scheme.
+*This code will run and demonstrate the basic idea, but remember, this is not a secure implementation. It's purely for educational purposes to illustrate the concept of managing deterministic rounding errors in a hypothetical LWR-based homomorphic encryption scheme.*
