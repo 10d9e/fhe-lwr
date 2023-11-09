@@ -1,5 +1,5 @@
 # fhe-lwr
-thoughts on fully homomophic encryption using learning with rounding (LWR)
+Thoughts on fully homomophic encryption using learning with rounding (LWR)
 
 In the context of Learning with Rounding (LWR), achieving unbounded Fully Homomorphic Encryption (FHE) would indeed require a mechanism to manage and refresh the "noise" or, more precisely, the rounding errors that accumulate during homomorphic operations. While LWE-based schemes use bootstrapping to reduce noise, the equivalent in LWR-based schemes would need a similar but inherently different method due to the nature of rounding errors.
 
