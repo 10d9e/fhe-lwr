@@ -153,20 +153,24 @@ Alright, let's construct a very simplified toy example that demonstrates the con
 - Let's say $\( m = 1 \)$.
 - Calculate $\( c \)$ without noise for simplicity:
 
-  $\[ c = \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i \cdot s_i) \right\rceil + m \mod p \]$
+  $$\[ c = \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i \cdot s_i) \right\rceil + m \mod p \]$$
   
   In this case, since $\( s_i = 1 \)$, the dot product simplifies to the sum of $\( a_i \)$.
 
 **SHE Setup:**
-- Let's have an SHE scheme that supports addition and consider it's encryption and decryption functions as $\( \text{Enc}_{\mathbf{s}}(\cdot) \) and \( \text{Dec}_{\mathbf{s}}(\cdot) \)$, respectively.
+- Let's have an SHE scheme that supports addition and consider it's encryption and decryption functions as respectively as:
+
+$\text{Enc}_{\mathbf{s}}(\cdot)\$
+
+$\text{Dec}_{\mathbf{s}}(\cdot)\$
 
 **LWR Error Calculation and Encryption:**
 - The error would be the difference between the unrounded and rounded product:
   
-  $\[ e = \left(\frac{p}{q} (\sum_{i=1}^{n} a_i) \mod q \right) - \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i) \right\rceil \mod p \]$
+  $$e = \left(\frac{p}{q} (\sum_{i=1}^{n} a_i) \mod q \right) - \left\lfloor \frac{p}{q} (\sum_{i=1}^{n} a_i) \right\rceil \mod p \$$
 - Encrypt this error with the SHE scheme:
   
-  $\[ e_{\text{enc}} = \text{Enc}_{\mathbf{s}}(e) \]$
+  $e_{\text{enc}} = \text{Enc}_{\mathbf{s}}(e) \$
 
 **Homomorphic Operations:**
 - Assume we have two encrypted LWR ciphertexts $\( c_1 \)$ and $\( c_2 \)$ that we want to add homomorphically.
