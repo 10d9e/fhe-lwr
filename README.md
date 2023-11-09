@@ -1,5 +1,32 @@
-# fhe-lwr
+# Fully Homomorphic Encryption using Learning with Rounding (LWR)
 Thoughts on fully homomophic encryption using learning with rounding (LWR)
+
+Learning with Rounding (LWR) is a variant of the Learning with Errors (LWE) problem and is designed to serve as a cryptographic hardness assumption. The core idea behind LWR, much like LWE, is to introduce a source of intractability that can be used to secure cryptographic algorithms, especially those aiming for post-quantum security. Here’s the gist of it:
+
+**LWE vs. LWR:**
+- In LWE, the security is based on the difficulty of solving linear equations that have been perturbed by some small random noise. In other words, you have an equation $\( \mathbf{a} \cdot \mathbf{s} + e \mod q \), where \( \mathbf{a} \)$ is a known vector, $\( \mathbf{s} \)$ is the secret, and $\( e \)$ is a small error term.
+- LWR, on the other hand, replaces the addition of the random noise with a rounding operation. Instead of adding an error term, LWR takes the product $\( \mathbf{a} \cdot \mathbf{s} \)$ and rounds it to the nearest multiple of a parameter $\( p \)$, within the modulus $\( q \)$. The rounding serves as the source of "error" but is deterministic, unlike the probabilistic noise in LWE.
+
+**Mathematical Formulation of LWR:**
+- You have a secret vector $\( \mathbf{s} \in \mathbb{Z}_q^n \)$.
+- You take a public vector $\( \mathbf{a} \in \mathbb{Z}_q^n \)$.
+- Compute the dot product $\( \mathbf{a} \cdot \mathbf{s} \mod q \)$.
+- Then, round this product to the nearest multiple of $\( p \)$ to obtain $\( b \)$, using a rounding function $\( \lfloor \cdot \rceil_p \)$: 
+
+  $\[
+  b = \left\lfloor \frac{p}{q} (\mathbf{a} \cdot \mathbf{s}) \right\rceil \mod p
+  \]$
+
+**Security and Application:**
+- The hardness in LWR lies in the loss of precision due to rounding; it is assumed to be computationally hard to recover $\( \mathbf{s} \)$ given $\( \mathbf{a} \)$ and $\( b \)$.
+- LWR can offer efficiency improvements over LWE because the deterministic nature of rounding can be less computationally intensive than generating and adding random noise.
+- LWR is also considered a potential post-quantum secure problem, resistant to quantum computer-based attacks, which is why it's being explored in the design of new cryptographic systems, including encryption, key exchange, and digital signatures.
+
+*Let's consider an analogy...*
+
+Imagine you're an archer trying to hit targets (solving equations) to win a prize (breaking the encryption). In the LWE version of the game, every time you hit a target, the organizer throws a handful of confetti (error) that might slightly shift your arrow off the bullseye. With LWR, instead, the targets are on rotating platforms (rounding operation) that might turn your direct hit into a near-miss. The challenge is figuring out where to aim, given the platform's predictable but obfuscating movement, to ensure a bullseye – a task presumed to be difficult enough to base security on.
+
+In practice, while LWR simplifies the process by removing the need for generating random noise, it still maintains computational hardness sufficient for cryptographic purposes, making it an attractive component in designing efficient and secure systems in the era of quantum threats.
 
 In the context of Learning with Rounding (LWR), achieving unbounded Fully Homomorphic Encryption (FHE) would indeed require a mechanism to manage and refresh the "noise" or, more precisely, the rounding errors that accumulate during homomorphic operations. While LWE-based schemes use bootstrapping to reduce noise, the equivalent in LWR-based schemes would need a similar but inherently different method due to the nature of rounding errors.
 
